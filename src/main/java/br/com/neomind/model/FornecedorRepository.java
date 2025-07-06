@@ -18,8 +18,9 @@ public class FornecedorRepository implements JpaFornecedorRepository {
     @Override
     @Transactional
     public FornecedorModel save(FornecedorModel fornecedor) {
-        em.persist(fornecedor);
-        return null;
+
+        System.out.println("fornecedor");
+        return em.merge(fornecedor);
     }
 
     @Override

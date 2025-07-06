@@ -32,7 +32,8 @@ public class FornecedorService {
 
             throw new BadRequestException(errors.toString());
         }
-
+        System.out.println("Validando fornecedor: " + fornecedor.getName());
+        System.out.println(CnpjValidator.isValid((fornecedor.getCnpj())));
         if(!CnpjValidator.isValid(fornecedor.getCnpj())){
             throw new BadRequestException("CNPJ invalido");
         }
@@ -57,14 +58,14 @@ public class FornecedorService {
 
     @Transactional
     public FornecedorModel create(FornecedorModel fornecedorModel) {
-        validateFornecedor(fornecedorModel, true);
+        validateFornecedor(fornecedorModel, false);
         return fornecedorRepository.save(fornecedorModel);
     }
 
     @Transactional
     public FornecedorRepository update(FornecedorModel fornecedorModel) {
         if(fornecedorRepository.findById(fornecedorModel.getId()).isPresent()){
-            validateFornecedor(fornecedorModel, false);
+            validateFornecedor(fornecedorModel, true);
             fornecedorRepository.save(fornecedorModel);
             return fornecedorRepository;
         } else{

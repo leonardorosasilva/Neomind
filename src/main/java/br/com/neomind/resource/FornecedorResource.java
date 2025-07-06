@@ -33,7 +33,7 @@ public class FornecedorResource {
     @Path("/{id}")
     public Response getFornecedorById(@PathParam("id") Long id) {
         FornecedorModel fornecedorModel = fornecedorService.getFornecedorById(id);
-        return Response.ok(fornecedorModel).build();
+        return Response.ok(fornecedorModel + "ob").build();
     }
 
     @POST
