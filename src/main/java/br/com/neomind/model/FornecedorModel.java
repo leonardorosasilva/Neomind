@@ -68,7 +68,7 @@ public class FornecedorModel {
         this.cnpj = cnpj;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
