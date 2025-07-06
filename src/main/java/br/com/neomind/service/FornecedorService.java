@@ -95,7 +95,9 @@ public class FornecedorService {
         return fornecedorRepository.countAll();
     }
 
-
+    public FornecedorModel getFornecedorById(Long id) {
+        return fornecedorRepository.findById(id).orElse(null);
+    }
 
     @Transactional
     public int importFornecedoresFromJson(List<FornecedorModel> fornecedoresToImport) {
