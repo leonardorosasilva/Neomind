@@ -9,7 +9,7 @@ import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.ws.rs.BadRequestException;
 import org.hibernate.validator.internal.constraintvalidators.hv.br.CNPJValidator;
-
+import br.com.neomind.util.CnpjValidator;
 import javax.xml.validation.Validator;
 import java.util.List;
 import java.util.Set;
