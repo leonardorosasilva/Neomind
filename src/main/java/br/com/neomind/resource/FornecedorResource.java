@@ -13,8 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Path("/fornecedores")
-@Produces(MediaType.APPLICATION_JSON) // response
-@Consumes(MediaType.APPLICATION_JSON) // request
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 public class FornecedorResource {
     @Inject
     private FornecedorService fornecedorService;
@@ -37,17 +37,17 @@ public class FornecedorResource {
     }
 
     @POST
-    public Response createFornecedor(FornecedorModel fornecedor) { // Mude FornecedorModelModel para FornecedorModel
-        // O service.create() retorna a entidade FornecedorModel criada
+    public Response createFornecedor(FornecedorModel fornecedor) {
+
         FornecedorModel createdFornecedor = fornecedorService.create(fornecedor);
 
-        // Retorna 201 Created com a URI do novo recurso no cabeçalho Location
+
         URI uri = UriBuilder.fromResource(FornecedorResource.class)
-                .path(String.valueOf(createdFornecedor.getId())) // Adiciona o ID ao path
+                .path(String.valueOf(createdFornecedor.getId()))
                 .build();
 
-        return Response.created(uri) // Status 201 Created
-                .entity(createdFornecedor) // Corpo da resposta com o objeto criado
+        return Response.created(uri)
+                .entity(createdFornecedor)
                 .build();
     }
 
