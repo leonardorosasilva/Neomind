@@ -5,7 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "fornecedor")
-public class Fornecedor {
+public class FornecedorModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -25,10 +25,10 @@ public class Fornecedor {
 
     private String description;
 
-    public Fornecedor() {
+    public FornecedorModel() {
     }
 
-    public Fornecedor(String name, String email, String cnpj, String description) {
+    public FornecedorModel(String name, String email, String cnpj, String description) {
         this.name = name;
         this.email = email;
         this.cnpj = cnpj;
