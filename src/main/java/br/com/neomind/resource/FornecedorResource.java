@@ -1,13 +1,14 @@
 package br.com.neomind.resource;
 
 import br.com.neomind.model.FornecedorModel;
-import br.com.neomind.model.FornecedorRepository;
 import br.com.neomind.service.FornecedorService;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import org.hibernate.service.spi.InjectService;
+import jakarta.inject.Inject;
+import jakarta.ws.rs.core.UriBuilder;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,8 +16,8 @@ import java.util.List;
 @Produces(MediaType.APPLICATION_JSON) // response
 @Consumes(MediaType.APPLICATION_JSON) // request
 public class FornecedorResource {
-
-    FornecedorService fornecedorService;
+    @Inject
+    private FornecedorService fornecedorService;
 
     @GET
     public Response getFornecedores(
@@ -36,9 +37,18 @@ public class FornecedorResource {
     }
 
     @POST
-    public Response createFornecedor(FornecedorModel fornecedorModel) {
-        FornecedorRepository fornecedorModel1 = fornecedorService.create(fornecedorModel);
-        return Response.ok(fornecedorModel1).build();
+    public Response createFornecedor(FornecedorModel fornecedor) { // Mude FornecedorModelModel para FornecedorModel
+        // O service.create() retorna a entidade FornecedorModel criada
+        FornecedorModel createdFornecedor = fornecedorService.create(fornecedor);
+
+        // Retorna 201 Created com a URI do novo recurso no cabeçalho Location
+        URI uri = UriBuilder.fromResource(FornecedorResource.class)
+                .path(String.valueOf(createdFornecedor.getId())) // Adiciona o ID ao path
+                .build();
+
+        return Response.created(uri) // Status 201 Created
+                .entity(createdFornecedor) // Corpo da resposta com o objeto criado
+                .build();
     }
 
     @PUT

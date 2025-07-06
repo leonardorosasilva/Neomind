@@ -8,7 +8,7 @@ import jakarta.validation.constraints.NotBlank;
 public class FornecedorModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Column(nullable = false)
     @NotBlank(message = "Nome não pode ser vazio")

@@ -3,6 +3,7 @@ package br.com.neomind.service;
 import br.com.neomind.model.FornecedorModel;
 import br.com.neomind.model.FornecedorRepository;
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintViolation;
@@ -16,9 +17,10 @@ import java.util.Set;
 
 @ApplicationScoped
 public class FornecedorService {
-
-    FornecedorRepository fornecedorRepository;
-    Validator validator;
+    @Inject
+    private FornecedorRepository fornecedorRepository;
+    @Inject
+    private Validator validator;
 
     private void validateFornecedor(FornecedorModel fornecedor, Boolean isUpdate) {
         Set<ConstraintViolation<FornecedorModel>> violations = validator.validate(fornecedor);
@@ -54,10 +56,9 @@ public class FornecedorService {
 
 
     @Transactional
-    public FornecedorRepository create(FornecedorModel fornecedorModel) {
+    public FornecedorModel create(FornecedorModel fornecedorModel) {
         validateFornecedor(fornecedorModel, true);
-        fornecedorRepository.save(fornecedorModel);
-        return fornecedorRepository;
+        return fornecedorRepository.save(fornecedorModel);
     }
 
     @Transactional
