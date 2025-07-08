@@ -1,13 +1,24 @@
 import { useEffect, useState } from "react"
+import AddFornecedoresForm from "./AddFornecedoresForm";
 
 
 
 export default function ListagemFornecedores(){
-    const [fornecedores,setFornecedores] = useState([])
+    type Fornecedor = {
+        name: string;
+        cnpj: string;
+        email: string;
+        description?: string;
+        [key: string]: any; // Add this if there are more fields
+    };
+    const [fornecedores, setFornecedores] = useState<Fornecedor[]>([])
     const [isLoading, setIsLoading] = useState(false)
     const [error, setError] = useState(null)
     const [editModelOpen, setEditModelOpen] = useState(false)
     const [openDropdownIndex, setOpenDropdownIndex] = useState<number | null>(null);
+    const [mouseEnter, setMouseEnter] = useState(false);
+    const [showForm, setShowForm] = useState(false);
+
 
 
     useEffect(() => {
@@ -60,13 +71,16 @@ export default function ListagemFornecedores(){
                         <span>Importar JSON</span>
                     </button>
 
-                    <button className="flex cursor-pointer items-center justify-center w-1/2 px-5 py-2 text-sm tracking-wide text-white transition-colors duration-200 bg-blue-500 rounded-lg shrink-0 sm:w-auto gap-x-2 hover:bg-blue-600 ">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-5 h-5">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    <button
+                        onClick={() => setShowForm(true)}
+                        className="flex cursor-pointer items-center justify-center w-1/2 px-5 py-2 text-sm tracking-wide text-white transition-colors duration-200 bg-blue-500 rounded-lg shrink-0 sm:w-auto gap-x-2 hover:bg-blue-600"
+                        >
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-5 h-5">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
-
                         <span>Adicionar Fornecedor</span>
                     </button>
+
                 </div>
             </div>
 
@@ -145,7 +159,7 @@ export default function ListagemFornecedores(){
                                                 </td>
                                                 <td className="px-4 py-4 text-sm whitespace-nowrap">
                                                     <div className="flex items-center">
-                                                        <button   onClick={() => setOpenDropdownIndex(openDropdownIndex === idx ? null : idx)} className="px-1 py-1 text-gray-500 transition-colors duration-200 rounded-lg hover:bg-gray-100 cursor-pointer">
+                                                        <button onMouseEnter={() => setMouseEnter(true)} onMouseLeave={() => setMouseEnter(false)} onClick={() => setOpenDropdownIndex(openDropdownIndex === idx ? null : idx)} className="px-1 py-1 text-gray-500 transition-colors duration-200 rounded-lg hover:bg-gray-100 cursor-pointer">
                                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
                                                                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z" />
                                                                 {/* Dropdown menu placeholder - implement with React state if needed */}
@@ -204,5 +218,42 @@ export default function ListagemFornecedores(){
                     </a>
                 </div>
                 </div>
+                {showForm && (
+                    <div className="fixed inset-0 z-50 flex items-center justify-center  bg-opacity-50">
+                        <div className="bg-white  rounded-lg shadow-lg p-6 w-full max-w-2xl relative">
+                        <button
+                            onClick={() => setShowForm(false)}
+                            className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
+                        >
+                            ✕
+                        </button>
+                        <AddFornecedoresForm
+                        onSave={async (data: any) => {
+                            try {
+                                const response = await fetch('http://localhost:8080/Neomind-1.0-SNAPSHOT/api/fornecedores/', {
+                                    method: 'POST',
+                                    headers: {
+                                    'Content-Type': 'application/json',
+                                    },
+                                    body: JSON.stringify(data),
+                            });
+
+                            if (!response.ok) throw new Error('Erro ao adicionar fornecedor');
+
+                            const newFornecedor = await response.json();
+                            console.log('newFornecedor', newFornecedor)
+                            setFornecedores([...fornecedores, newFornecedor]);
+                            setShowForm(false); // esconde o form
+                            } catch (err) {
+                            console.error(err);
+                            alert("Erro ao adicionar fornecedor.");
+                            }
+                        }}
+                        />
+                    </div>
+                </div>
+
+                    )}
+
         </section>
 )}

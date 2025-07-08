@@ -26,7 +26,7 @@ public class FornecedorResource {
 
         List<FornecedorModel> fornecedores = fornecedorService.listFornecedoresPaginated(page, size);
         long countFornecedores = fornecedorService.countFornecedores();
-        return Response.ok(fornecedores).header("X-Total-Count", countFornecedores).build();
+        return Response.ok(fornecedores).header("Access-Control-Allow-Origin", "*").build();
     }
 
     @GET

@@ -10,52 +10,25 @@ public class CnpjValidator {
 
     }
     public static boolean isValid(String cnpj) {
-        cnpj = cnpj.replace(".","").replace("-", "").replace("/", "");
-        if(cnpj.length() != 14) {
-            return false;
-        }
-
-        // Verifica se todos os dígitos são iguais (ex: "00000000000000"), o que é inválido
-        if (cnpj.matches("(\\d)\\1{13}")) {
-            return false;
-        }
-
-        char dig13, dig14;
-        int sm, i, r, num;
-        String cnpjCalc;
-
+        cnpj = cnpj.replaceAll("\\D", "");
+        System.out.println(cnpj);
+        if (cnpj.length() != 14 || cnpj.matches("(\\d)\\1{13}")) return false;
+        System.out.println("depois do if: " + cnpj);
         try {
-            sm = 0;
-            int peso = 2;
-            for (i = 11; i >= 0; i--) {
-                num = (int)(cnpj.charAt(i) - 48);
-                sm = sm + (num * peso);
-                peso = peso + 1;
-                if (peso == 10) {
-                    peso = 2;
-                }
-            }
+            int[] pesos1 = {5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2};
+            int[] pesos2 = {6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2};
 
-            r = sm % 11;
-            dig13 = (char)((r == 0) || (r == 1) ? '0' : (11 - r) + 48);
+            int soma = 0;
+            for (int i = 0; i < 12; i++) soma += (cnpj.charAt(i) - '0') * pesos1[i];
+            int dig1 = soma % 11 < 2 ? 0 : 11 - (soma % 11);
 
-            sm = 0;
-            peso = 2;
-            for (i = 12; i >= 0; i--) {
-                num = (int)(cnpj.charAt(i) - 48);
-                sm = sm + (num * peso);
-                peso = peso + 1;
-                if (peso == 10) {
-                    peso = 2;
-                }
-            }
+            soma = 0;
+            for (int i = 0; i < 13; i++) soma += (cnpj.charAt(i) - '0') * pesos2[i];
+            int dig2 = soma % 11 < 2 ? 0 : 11 - (soma % 11);
 
-            r = sm % 11;
-            dig14 = (char)((r == 0) || (r == 1) ? '0' : (11 - r) + 48);
-
-            cnpjCalc = cnpj.substring(0, 12) + dig13 + dig14;
-            return cnpjCalc.equals(cnpj);
-        } catch (InputMismatchException erro) {
+            return dig1 == (cnpj.charAt(12) - '0') && dig2 == (cnpj.charAt(13) - '0');
+        } catch (Exception e) {
+            System.out.println("err " + e);
             return false;
         }
     }

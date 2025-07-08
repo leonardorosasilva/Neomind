@@ -32,11 +32,13 @@ public class FornecedorService {
 
             throw new BadRequestException(errors.toString());
         }
+        /*
         System.out.println("Validando fornecedor: " + fornecedor.getName());
         System.out.println(CnpjValidator.isValid((fornecedor.getCnpj())));
         if(!CnpjValidator.isValid(fornecedor.getCnpj())){
             throw new BadRequestException("CNPJ invalido");
         }
+        */
 
         fornecedorRepository.findAll().forEach(e -> {
             if(isUpdate && e.getId().equals(fornecedor.getId())){
