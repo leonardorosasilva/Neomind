@@ -720,7 +720,7 @@ export default function ListagemFornecedores() {
                             </button>
                             <button
                                 onClick={handleImportJson}
-                                disabled={!jsonText.trim()}
+                                disabled={!jsonText.trim() }
                                 className={`px-4 py-2 text-sm font-medium text-white rounded-md focus:outline-none ${jsonText.trim()
                                         ? 'bg-blue-600 hover:bg-blue-700'
                                         : 'bg-gray-400 cursor-not-allowed'
