@@ -9,11 +9,13 @@ public class JPAUtil {
     
     static {
         try {
-            System.out.println("Inicializando EntityManagerFactory...");
+            System.out.println("🔄 Inicializando EntityManagerFactory...");
             emf = Persistence.createEntityManagerFactory("default");
-            System.out.println("EntityManagerFactory inicializado com sucesso!");
+            System.out.println("✅ EntityManagerFactory inicializado com sucesso!");
+            System.out.println("💾 Banco H2 configurado em: ./database/neostore.mv.db");
+            
         } catch (Exception e) {
-            System.err.println("Erro ao inicializar EntityManagerFactory: " + e.getMessage());
+            System.err.println("❌ Erro ao inicializar EntityManagerFactory: " + e.getMessage());
             e.printStackTrace();
             throw new RuntimeException("Falha na inicialização do JPA", e);
         }

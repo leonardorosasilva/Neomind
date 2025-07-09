@@ -6,7 +6,7 @@ interface Fornecedor {
   name: string;
   cnpj: string;
   email: string;
-  description: string;
+  description?: string;
 }
 
 interface AddFornecedoresFormProps {
@@ -28,9 +28,12 @@ export default function AddFornecedoresForm({ onSave, fornecedor }: AddFornecedo
     cnpj: ''
   });
 
-  useEffect(() => {
+    useEffect(() => {
     if (fornecedor) {
-      setForm(fornecedor);
+      setForm({
+        ...fornecedor,
+        description: fornecedor.description || '', // Se for undefined/null, usar string vazia
+      });
     } else {
       // Reset form when no fornecedor is provided
       setForm({
@@ -101,14 +104,24 @@ export default function AddFornecedoresForm({ onSave, fornecedor }: AddFornecedo
 
   // Verifica se o formulário é válido para habilitar/desabilitar o botão
   const isFormValid = () => {
+    console.log('Validando formulário:', form); // Debug
+    console.log('Errors:', errors); // Debug
+    
     const hasRequiredFields = form.name.trim() && form.email.trim() && form.cnpj.trim();
     const hasNoErrors = !errors.email && !errors.cnpj;
-    const emailValid = validateEmail(form.email);
-    const cnpjValid = validateCnpj(form.cnpj);
+    const emailValid = form.email ? validateEmail(form.email) : false;
+    const cnpjValid = form.cnpj ? validateCnpj(form.cnpj) : false;
     
-    return hasRequiredFields && hasNoErrors && emailValid && cnpjValid;
+    console.log('hasRequiredFields:', hasRequiredFields);
+    console.log('hasNoErrors:', hasNoErrors);
+    console.log('emailValid:', emailValid);
+    console.log('cnpjValid:', cnpjValid);
+    
+    const isValid = hasRequiredFields && hasNoErrors && emailValid && cnpjValid;
+    console.log('isFormValid result:', isValid);
+    
+    return isValid;
   };
-
   return (
     <section className="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md">
       <h2 className="text-lg font-semibold text-gray-700 capitalize">
@@ -150,11 +163,11 @@ export default function AddFornecedoresForm({ onSave, fornecedor }: AddFornecedo
             )}
           </div>
 
-          <div className="sm:col-span-2">
+            <div className="sm:col-span-2">
             <label htmlFor="description" className="text-gray-700">Descrição</label>
             <textarea
               id="description"
-              value={form.description}
+              value={form.description || ''} // Garantir que nunca seja undefined
               onChange={handleChange}
               rows={3}
               className="resize-none block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md 
@@ -187,6 +200,7 @@ export default function AddFornecedoresForm({ onSave, fornecedor }: AddFornecedo
         <div className="flex justify-end mt-6">
           <button
             type="submit"
+            onClick={() => console.log('Form submitted:', form)}
             disabled={!isFormValid()}
             className={`px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform rounded-md focus:outline-none ${
               isFormValid()

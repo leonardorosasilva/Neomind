@@ -12,21 +12,20 @@
         <class>br.com.neomind.model.FornecedorModel</class>
         
         <properties>
-            <!-- Configuração do H2 Database -->
+            <!-- Configuração do H2 Database SIMPLIFICADA -->
             <property name="jakarta.persistence.jdbc.driver" value="org.h2.Driver"/>
-            <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:mem:neostore;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:file:./database/neostore"/>
             <property name="jakarta.persistence.jdbc.user" value="sa"/>
-            <property name="jakarta.persistence.jdbc.password" value="admin"/>
+            <property name="jakarta.persistence.jdbc.password" value=""/>
 
             <!-- Configurações do Hibernate -->
             <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
-            <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="true"/>
             
-            <!-- Configurações de performance -->
-            <property name="hibernate.connection.pool_size" value="5"/>
-            <property name="hibernate.current_session_context_class" value="thread"/>
+            <!-- Configurações básicas -->
+            <property name="hibernate.connection.autocommit" value="false"/>
             
             <!-- Configurações de logging -->
             <property name="hibernate.use_sql_comments" value="true"/>

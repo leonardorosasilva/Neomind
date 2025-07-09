@@ -1,43 +1,46 @@
-// filepath: /home/leonardo/Desktop/Neomind - Processo Seletivo/backend/src/main/java/br/com/neomind/config/CorsFilter.java
 package br.com.neomind.config;
 
-import jakarta.ws.rs.container.ContainerRequestContext;
-import jakarta.ws.rs.container.ContainerRequestFilter;
-import jakarta.ws.rs.container.ContainerResponseContext;
-import jakarta.ws.rs.container.ContainerResponseFilter;
-import jakarta.ws.rs.core.Response;
-import jakarta.ws.rs.ext.Provider;
+import jakarta.servlet.*;
+import jakarta.servlet.annotation.WebFilter;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@Provider
-public class CorsFilter implements ContainerRequestFilter, ContainerResponseFilter {
+@WebFilter("/*")
+public class CorsFilter implements Filter {
 
     @Override
-    public void filter(ContainerRequestContext requestContext) throws IOException {
-        // Intercepta requisições OPTIONS e responde imediatamente
-        if ("OPTIONS".equalsIgnoreCase(requestContext.getMethod())) {
-            requestContext.abortWith(Response.ok()
-                    .header("Access-Control-Allow-Origin", "http://localhost:5173")
-                    .header("Access-Control-Allow-Credentials", "true")
-                    .header("Access-Control-Allow-Headers", 
-                            "origin, content-type, accept, authorization, x-requested-with")
-                    .header("Access-Control-Allow-Methods", 
-                            "GET, POST, PUT, DELETE, OPTIONS, HEAD")
-                    .build());
-        }
+    public void init(FilterConfig filterConfig) throws ServletException {
+        // Inicialização do filtro
     }
 
     @Override
-    public void filter(ContainerRequestContext requestContext, ContainerResponseContext responseContext)
-            throws IOException {
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+            throws IOException, ServletException {
         
-        // Adiciona headers CORS para todas as outras requisições
-        responseContext.getHeaders().putSingle("Access-Control-Allow-Origin", "http://localhost:5173");
-        responseContext.getHeaders().putSingle("Access-Control-Allow-Credentials", "true");
-        responseContext.getHeaders().putSingle("Access-Control-Allow-Headers",
-                "origin, content-type, accept, authorization, x-requested-with");
-        responseContext.getHeaders().putSingle("Access-Control-Allow-Methods",
-                "GET, POST, PUT, DELETE, OPTIONS, HEAD");
+        HttpServletRequest httpRequest = (HttpServletRequest) request;
+        HttpServletResponse httpResponse = (HttpServletResponse) response;
+
+        // Headers CORS
+        httpResponse.setHeader("Access-Control-Allow-Origin", "*");
+        httpResponse.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+        httpResponse.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, X-Requested-With, Accept, Origin");
+        httpResponse.setHeader("Access-Control-Max-Age", "3600");
+        httpResponse.setHeader("Access-Control-Allow-Credentials", "false");
+
+        // Se for OPTIONS, retorna 200 direto
+        if ("OPTIONS".equalsIgnoreCase(httpRequest.getMethod())) {
+            httpResponse.setStatus(HttpServletResponse.SC_OK);
+            return;
+        }
+
+        // Continua para o próximo filtro/servlet
+        chain.doFilter(request, response);
+    }
+
+    @Override
+    public void destroy() {
+        // Limpeza do filtro
     }
 }
