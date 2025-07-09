@@ -11,9 +11,7 @@ public class CnpjValidator {
     }
     public static boolean isValid(String cnpj) {
         cnpj = cnpj.replaceAll("\\D", "");
-        System.out.println(cnpj);
         if (cnpj.length() != 14 || cnpj.matches("(\\d)\\1{13}")) return false;
-        System.out.println("depois do if: " + cnpj);
         try {
             int[] pesos1 = {5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2};
             int[] pesos2 = {6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2};
@@ -28,7 +26,7 @@ public class CnpjValidator {
 
             return dig1 == (cnpj.charAt(12) - '0') && dig2 == (cnpj.charAt(13) - '0');
         } catch (Exception e) {
-            System.out.println("err " + e);
+
             return false;
         }
     }

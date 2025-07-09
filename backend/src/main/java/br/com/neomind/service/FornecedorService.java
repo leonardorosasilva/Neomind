@@ -227,8 +227,6 @@ public class FornecedorService {
     }
     
     public void verificarBanco() {
-        System.out.println("🔍 === VERIFICAÇÃO DO BANCO ===");
         fornecedorRepository.verificarConexaoBanco();
-        System.out.println("🔍 === FIM VERIFICAÇÃO ===");
     }
 }

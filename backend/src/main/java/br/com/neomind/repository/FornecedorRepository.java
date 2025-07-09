@@ -19,7 +19,7 @@ public class FornecedorRepository {
                 FornecedorModel.class
             );
             List<FornecedorModel> resultado = query.getResultList();
-            System.out.println("🔍 Listando " + resultado.size() + " fornecedor(es) do banco");
+            
             return resultado;
         } finally {
             em.close();
@@ -30,7 +30,7 @@ public class FornecedorRepository {
         EntityManager em = JPAUtil.getEntityManager();
         try {
             FornecedorModel fornecedor = em.find(FornecedorModel.class, id);
-            System.out.println("🔍 Buscando fornecedor ID " + id + ": " + (fornecedor != null ? "ENCONTRADO" : "NÃO ENCONTRADO"));
+            
             return Optional.ofNullable(fornecedor);
         } finally {
             em.close();
@@ -42,15 +42,15 @@ public class FornecedorRepository {
         EntityTransaction transaction = em.getTransaction();
         
         try {
-            System.out.println("💾 Iniciando transação para salvar fornecedor: " + fornecedor.getname());
+            
             
             transaction.begin();
             
             if (fornecedor.getId() == null) {
-                System.out.println("➕ Persistindo novo fornecedor");
+                
                 em.persist(fornecedor);
             } else {
-                System.out.println("🔄 Atualizando fornecedor existente");
+                
                 fornecedor = em.merge(fornecedor);
             }
             
@@ -58,15 +58,15 @@ public class FornecedorRepository {
             em.flush();
             
             transaction.commit();
-            System.out.println("✅ Fornecedor salvo com sucesso! ID: " + fornecedor.getId());
+            
             
             return fornecedor;
             
         } catch (Exception e) {
-            System.err.println("❌ Erro ao salvar fornecedor: " + e.getMessage());
+            
             if (transaction.isActive()) {
                 transaction.rollback();
-                System.err.println("🔄 Rollback executado");
+                
             }
             throw new RuntimeException("Erro ao salvar fornecedor: " + e.getMessage(), e);
         } finally {
@@ -79,7 +79,7 @@ public class FornecedorRepository {
         EntityTransaction transaction = em.getTransaction();
         
         try {
-            System.out.println("🔄 Iniciando transação para atualizar fornecedor ID: " + fornecedor.getId());
+            
             
             transaction.begin();
             
@@ -102,14 +102,14 @@ public class FornecedorRepository {
             existente = em.merge(existente);
             transaction.commit();
             
-            System.out.println("✅ Fornecedor atualizado com sucesso! ID: " + existente.getId());
+            
             return existente;
             
         } catch (Exception e) {
-            System.err.println("❌ Erro ao atualizar fornecedor: " + e.getMessage());
+            
             if (transaction.isActive()) {
                 transaction.rollback();
-                System.err.println("🔄 Rollback executado");
+                
             }
             throw new RuntimeException("Erro ao atualizar fornecedor: " + e.getMessage(), e);
         } finally {
@@ -122,7 +122,7 @@ public class FornecedorRepository {
         EntityTransaction transaction = em.getTransaction();
         
         try {
-            System.out.println("🗑️ Iniciando transação para deletar fornecedor ID: " + id);
+            
             
             transaction.begin();
             
@@ -138,13 +138,13 @@ public class FornecedorRepository {
             
             transaction.commit();
             
-            System.out.println("✅ Fornecedor deletado com sucesso! ID: " + id);
+            
             
         } catch (Exception e) {
-            System.err.println("❌ Erro ao deletar fornecedor: " + e.getMessage());
+            
             if (transaction.isActive()) {
                 transaction.rollback();
-                System.err.println("🔄 Rollback executado");
+                
             }
             throw new RuntimeException("Erro ao deletar fornecedor: " + e.getMessage(), e);
         } finally {
@@ -159,18 +159,18 @@ public class FornecedorRepository {
             // Contar quantos registros existem
             Long count = em.createQuery("SELECT COUNT(f) FROM FornecedorModel f", Long.class)
                           .getSingleResult();
-            System.out.println("🗃️ Total de fornecedores no banco: " + count);
+            
             
             // Listar todos para debug
             List<FornecedorModel> todos = em.createQuery("SELECT f FROM FornecedorModel f", FornecedorModel.class)
                                             .getResultList();
-            System.out.println("📋 Fornecedores no banco:");
+            
             for (FornecedorModel f : todos) {
-                System.out.println("  - ID: " + f.getId() + " | Nome: " + f.getname() + " | Email: " + f.getEmail());
+                
             }
             
         } catch (Exception e) {
-            System.err.println("❌ Erro ao verificar banco: " + e.getMessage());
+            
         } finally {
             em.close();
         }

@@ -15,7 +15,7 @@ interface AddFornecedoresFormProps {
 }
 
 export default function AddFornecedoresForm({ onSave, fornecedor }: AddFornecedoresFormProps) {
-  console.log('AddFornecedoresForm', fornecedor);
+
   const [form, setForm] = useState<Fornecedor>({
     name: '',
     cnpj: '',
@@ -28,7 +28,7 @@ export default function AddFornecedoresForm({ onSave, fornecedor }: AddFornecedo
     cnpj: ''
   });
 
-    useEffect(() => {
+  useEffect(() => {
     if (fornecedor) {
       setForm({
         ...fornecedor,
@@ -60,7 +60,7 @@ export default function AddFornecedoresForm({ onSave, fornecedor }: AddFornecedo
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { id, value } = e.target;
-    
+
     setForm((prev) => ({
       ...prev,
       [id]: value,
@@ -86,11 +86,11 @@ export default function AddFornecedoresForm({ onSave, fornecedor }: AddFornecedo
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     // Validação final antes do submit
     const emailValid = !form.email || validateEmail(form.email);
     const cnpjValid = !form.cnpj || validateCnpj(form.cnpj);
-    
+
     if (!emailValid || !cnpjValid) {
       setErrors({
         email: !emailValid ? 'Email inválido' : '',
@@ -104,22 +104,22 @@ export default function AddFornecedoresForm({ onSave, fornecedor }: AddFornecedo
 
   // Verifica se o formulário é válido para habilitar/desabilitar o botão
   const isFormValid = () => {
-    console.log('Validando formulário:', form); // Debug
-    console.log('Errors:', errors); // Debug
-    
+
+
+
     const hasRequiredFields = form.name.trim() && form.email.trim() && form.cnpj.trim();
     const hasNoErrors = !errors.email && !errors.cnpj;
     const emailValid = form.email ? validateEmail(form.email) : false;
     const cnpjValid = form.cnpj ? validateCnpj(form.cnpj) : false;
-    
-    console.log('hasRequiredFields:', hasRequiredFields);
-    console.log('hasNoErrors:', hasNoErrors);
-    console.log('emailValid:', emailValid);
-    console.log('cnpjValid:', cnpjValid);
-    
+
+
+
+
+
+
     const isValid = hasRequiredFields && hasNoErrors && emailValid && cnpjValid;
-    console.log('isFormValid result:', isValid);
-    
+
+
     return isValid;
   };
   return (
@@ -152,18 +152,17 @@ export default function AddFornecedoresForm({ onSave, fornecedor }: AddFornecedo
               onChange={handleChange}
               required
               className={`block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-md 
-                         focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring ${
-                         errors.email 
-                           ? 'border-red-400 focus:border-red-400' 
-                           : 'border-gray-200 focus:border-blue-400'
-                       }`}
+                         focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring ${errors.email
+                  ? 'border-red-400 focus:border-red-400'
+                  : 'border-gray-200 focus:border-blue-400'
+                }`}
             />
             {errors.email && (
               <p className="mt-1 text-sm text-red-600">{errors.email}</p>
             )}
           </div>
 
-            <div className="sm:col-span-2">
+          <div className="sm:col-span-2">
             <label htmlFor="description" className="text-gray-700">Descrição</label>
             <textarea
               id="description"
@@ -185,11 +184,10 @@ export default function AddFornecedoresForm({ onSave, fornecedor }: AddFornecedo
               required
               placeholder="00.000.000/0000-00"
               className={`block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-md 
-                         focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring ${
-                         errors.cnpj 
-                           ? 'border-red-400 focus:border-red-400' 
-                           : 'border-gray-200 focus:border-blue-400'
-                       }`}
+                         focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring ${errors.cnpj
+                  ? 'border-red-400 focus:border-red-400'
+                  : 'border-gray-200 focus:border-blue-400'
+                }`}
             />
             {errors.cnpj && (
               <p className="mt-1 text-sm text-red-600">{errors.cnpj}</p>
@@ -200,13 +198,12 @@ export default function AddFornecedoresForm({ onSave, fornecedor }: AddFornecedo
         <div className="flex justify-end mt-6">
           <button
             type="submit"
-            onClick={() => console.log('Form submitted:', form)}
+            
             disabled={!isFormValid()}
-            className={`px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform rounded-md focus:outline-none ${
-              isFormValid()
+            className={`px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform rounded-md focus:outline-none ${isFormValid()
                 ? 'bg-blue-600 hover:bg-blue-500 focus:bg-blue-500 cursor-pointer'
                 : 'bg-gray-400 cursor-not-allowed'
-            }`}
+              }`}
           >
             {fornecedor ? 'Salvar Alterações' : 'Salvar'}
           </button>
