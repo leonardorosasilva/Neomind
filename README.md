@@ -7,7 +7,7 @@ Sistema completo para gerenciamento de fornecedores com frontend React/TypeScrip
 - ✅ Listagem de fornecedores com paginação
 - ✅ Cadastro e edição de fornecedores
 - ✅ Exclusão de fornecedores
-- ✅ Busca por nome, email, CNPJ ou descrição
+- ✅ Busca CNPJ
 - ✅ Importação de fornecedores via JSON
 - ✅ Validação de dados
 - ✅ Interface responsiva
