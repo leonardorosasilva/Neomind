@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="afee6f0f-bd6d-4938-9a7d-deeb94a9fc8d" name="Changes" comment="front end criado">
+      <change beforePath="$PROJECT_DIR$/backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/META-INF/persistence.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/META-INF/persistence.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/neostore/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/neostore/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/neostore/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/neostore/package.json" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;leonardorosasilva&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/leonardorosasilva/Neomind.git&quot;,
+    &quot;accountId&quot;: &quot;d878c7ee-2edd-41ec-aaae-25d867939744&quot;
+  }
+}</component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/backend/src/main/java/br/com/neomind/service/FornecedorService.java" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="2zTtQDD3V5hTHs0A1kxfoCywpsM" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/leonardo/Desktop/vfinal/FinanceProject 2/FinanceProject&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/backend" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="Neomind" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="Neomind" />
+      <option name="filePath" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-a94e463ab2e7-intellij.indexing.shared.core-IU-243.25659.59" />
+        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-IU-243.25659.59" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="afee6f0f-bd6d-4938-9a7d-deeb94a9fc8d" name="Changes" comment="" />
+      <created>1751766876202</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1751766876202</updated>
+      <workItem from="1751766877677" duration="9000" />
+      <workItem from="1751770806880" duration="11987000" />
+      <workItem from="1751788282214" duration="3906000" />
+      <workItem from="1751807663822" duration="10732000" />
+      <workItem from="1751841107848" duration="509000" />
+      <workItem from="1751843746123" duration="746000" />
+      <workItem from="1751844698263" duration="189000" />
+      <workItem from="1751902757033" duration="52000" />
+      <workItem from="1752016253642" duration="26000" />
+      <workItem from="1752022323132" duration="516000" />
+    </task>
+    <task id="LOCAL-00001" summary="fear(model,repository): métodos e lógica do repositório criada">
+      <option name="closed" value="true" />
+      <created>1751771785598</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1751771785598</updated>
+    </task>
+    <task id="LOCAL-00002" summary="fear(model) fix: arquivo renomeado">
+      <option name="closed" value="true" />
+      <created>1751771809778</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1751771809778</updated>
+    </task>
+    <task id="LOCAL-00003" summary="fear(model) fix: mudança para o tipo primitivo do ID para usar o equals">
+      <option name="closed" value="true" />
+      <created>1751774598045</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1751774598045</updated>
+    </task>
+    <task id="LOCAL-00004" summary="feat(service) add: toda a logica para o fornecedores implementada">
+      <option name="closed" value="true" />
+      <created>1751775413233</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1751775413233</updated>
+    </task>
+    <task id="LOCAL-00005" summary="feat(service,util) fix: validação de cnpj pelo backend">
+      <option name="closed" value="true" />
+      <created>1751781825112</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1751781825112</updated>
+    </task>
+    <task id="LOCAL-00006" summary="feat(service) fix: import validator correto">
+      <option name="closed" value="true" />
+      <created>1751781899410</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1751781899410</updated>
+    </task>
+    <task id="LOCAL-00007" summary="feat(service) add: criação de pegar o fornecedor pelo id">
+      <option name="closed" value="true" />
+      <created>1751783114900</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1751783114900</updated>
+    </task>
+    <task id="LOCAL-00008" summary="feat(resource) add: CRUD">
+      <option name="closed" value="true" />
+      <created>1751784241549</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1751784241549</updated>
+    </task>
+    <task id="LOCAL-00009" summary="feat(root) ajust: Config. para o DB">
+      <option name="closed" value="true" />
+      <created>1751784455487</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1751784455487</updated>
+    </task>
+    <task id="LOCAL-00010" summary="feat(root) ajust: dependencia postgresql">
+      <option name="closed" value="true" />
+      <created>1751784594219</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1751784594219</updated>
+    </task>
+    <task id="LOCAL-00011" summary="feat(root) ajust: docker criada">
+      <option name="closed" value="true" />
+      <created>1751785131720</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1751785131720</updated>
+    </task>
+    <task id="LOCAL-00012" summary="feat(root) ajust: .">
+      <option name="closed" value="true" />
+      <created>1751790351304</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1751790351304</updated>
+    </task>
+    <task id="LOCAL-00013" summary="feat(all) fix: arruimei o tipo do metodo que estava causando um badRequest">
+      <option name="closed" value="true" />
+      <created>1751811060993</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1751811060993</updated>
+    </task>
+    <task id="LOCAL-00014" summary="feat(resource) ajust: tirados os comentario">
+      <option name="closed" value="true" />
+      <created>1751811477643</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1751811477643</updated>
+    </task>
+    <task id="LOCAL-00015" summary="feat(fix) fix create: estava retornando null o fornecedor e não criava">
+      <option name="closed" value="true" />
+      <created>1751820505352</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1751820505352</updated>
+    </task>
+    <task id="LOCAL-00016" summary="movendo pastas">
+      <option name="closed" value="true" />
+      <created>1751843936523</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1751843936523</updated>
+    </task>
+    <task id="LOCAL-00017" summary="front end criado">
+      <option name="closed" value="true" />
+      <created>1751844163005</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1751844163005</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="fear(model,repository): métodos e lógica do repositório criada" />
+    <MESSAGE value="fear(model) fix: arquivo renomeado" />
+    <MESSAGE value="fear(model) fix: mudança para o tipo primitivo do ID para usar o equals" />
+    <MESSAGE value="feat(service) add: toda a logica para o fornecedores implementada" />
+    <MESSAGE value="feat(service,util) fix: validação de cnpj pelo backend" />
+    <MESSAGE value="feat(service) fix: import validator correto" />
+    <MESSAGE value="feat(service) add: criação de pegar o fornecedor pelo id" />
+    <MESSAGE value="feat(resource) add: CRUD" />
+    <MESSAGE value="feat(root) ajust: Config. para o DB" />
+    <MESSAGE value="feat(root) ajust: dependencia postgresql" />
+    <MESSAGE value="feat(root) ajust: docker criada" />
+    <MESSAGE value="feat(root) ajust: ." />
+    <MESSAGE value="feat(all) fix: arruimei o tipo do metodo que estava causando um badRequest" />
+    <MESSAGE value="feat(resource) ajust: tirados os comentario" />
+    <MESSAGE value="feat(fix) fix create: estava retornando null o fornecedor e não criava" />
+    <MESSAGE value="movendo pastas" />
+    <MESSAGE value="front end criado" />
+    <option name="LAST_COMMIT_MESSAGE" value="front end criado" />
+  </component>
+</project>

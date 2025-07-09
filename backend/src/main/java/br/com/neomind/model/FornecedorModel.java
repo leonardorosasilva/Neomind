@@ -1,7 +1,9 @@
 package br.com.neomind.model;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "fornecedor")
@@ -11,7 +13,8 @@ public class FornecedorModel {
     private Long id;
 
     @Column(nullable = false)
-    @NotBlank(message = "Nome não pode ser vazio")
+    @NotBlank(message = "name não pode ser vazio")
+    @Size(max = 255, message = "name deve ter no máximo 255 caracteres")
     private String name;
 
     @Column(unique = true, nullable = false)
@@ -21,12 +24,14 @@ public class FornecedorModel {
 
     @Column(unique = true, nullable = false)
     @NotBlank(message = "CNPJ não pode ser vazio")
-    private String cnpj; // vamos formatar com mascara
+    @Size(min = 14, max = 18, message = "CNPJ deve ter entre 14 e 18 caracteres")
+    private String cnpj;
 
+    @Column(columnDefinition = "TEXT")
     private String description;
 
-    public FornecedorModel() {
-    }
+    // Construtores
+    public FornecedorModel() {}
 
     public FornecedorModel(String name, String email, String cnpj, String description) {
         this.name = name;
@@ -35,12 +40,20 @@ public class FornecedorModel {
         this.description = description;
     }
 
+    // Getters e Setters
+    public Long getId() {
+        return id;
+    }
 
-    public String getName() {
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getname() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setname(String name) {
         this.name = name;
     }
 
@@ -52,14 +65,6 @@ public class FornecedorModel {
         this.email = email;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public String getCnpj() {
         return cnpj;
     }
@@ -68,11 +73,22 @@ public class FornecedorModel {
         this.cnpj = cnpj;
     }
 
-    public Long getId() {
-        return id;
+    public String getdescription() {
+        return description;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setdescription(String description) {
+        this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return "FornecedorModel{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", cnpj='" + cnpj + '\'' +
+                ", description='" + description + '\'' +
+                '}';
     }
 }

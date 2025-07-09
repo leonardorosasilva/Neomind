@@ -3,12 +3,12 @@ version: '3.8'
 services:
   db:
     image: postgres:16-alpine
-    container_name: neostore-postgres
+    container_name: neostore
     restart: always
     ports:
-      - "5432:5432"
+      - "5450:5432"  # Porta local 5450 -> Porta do container 5432
     environment:
-      POSTGRES_DB: neostore_db
+      POSTGRES_DB: neostore
       POSTGRES_USER: sa
       POSTGRES_PASSWORD: admin
     volumes:
