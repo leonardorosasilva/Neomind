@@ -242,12 +242,8 @@ export default function ListagemFornecedores() {
 
     const handleEdit = (e: React.MouseEvent, fornecedor: Fornecedor) => {
         e.stopPropagation(); // Evita o clique na linha
-        const foundFornecedor = cloneFornecedores.find(f => {
-
-            if (fornecedor.id && f.id === fornecedor.id) {
-                return f;
-            }
-        });
+        const foundFornecedor = cloneFornecedores.find(f => f.id === fornecedor.id);
+        console.log('Editando fornecedor:', foundFornecedor); // Para debug
         setFornecedorEditando(foundFornecedor);
         setShowForm(true);
     };
@@ -275,12 +271,8 @@ export default function ListagemFornecedores() {
     }, [fornecedores.length]);
 
     const handleRowClick = (fornecedor: Fornecedor) => {
-        const foundFornecedor = cloneFornecedores.find(f => {
-            if (fornecedor.id && f.id === fornecedor.id) {
-                return f;
-            }
-        });
-
+        const foundFornecedor = cloneFornecedores.find(f => f.id === fornecedor.id);
+        console.log('Clique na linha - fornecedor:', foundFornecedor); // Para debug
         setFornecedorEditando(foundFornecedor);
         setShowForm(true);
     };

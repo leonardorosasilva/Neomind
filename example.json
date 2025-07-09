@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Pires",
+    "cnpj": "35.989.624/2837-98",
+    "email": "caueteixeira@almeida.br",
+    "description": "O poder de atingir seus objetivos antes de tudo"
+  },
+  {
+    "name": "Almeida",
+    "cnpj": "16.213.322/6406-46",
+    "email": "enzo-gabrielcampos@goncalves.com",
+    "description": "A vantagem de conseguir sem preocupação"
+  },
+  {
+    "name": "Teixeira",
+    "cnpj": "42.637.026/6919-10",
+    "email": "jnunes@da.br",
+    "description": "O conforto de atingir seus objetivos naturalmente"
+  },
+  {
+    "name": "Carvalho",
+    "cnpj": "99.890.608/3514-03",
+    "email": "maria-clara46@azevedo.net",
+    "description": "A segurança de evoluir com toda a tranquilidade"
+  },
+  {
+    "name": "Farias da Paz S.A.",
+    "cnpj": "64.718.765/4425-97",
+    "email": "pereiralivia@vieira.com",
+    "description": "O direito de conseguir com confiança"
+  }
+]

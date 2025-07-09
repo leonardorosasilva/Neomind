@@ -3,7 +3,6 @@ package br.com.neomind.util;
 //INFORMATIVO
 /*https://www.linkedin.com/pulse/como-validar-o-novo-formato-do-cnpj-brasil-welyab-paula-imtvf/*/
 
-import java.util.InputMismatchException;
 
 public class CnpjValidator {
     private CnpjValidator() {
