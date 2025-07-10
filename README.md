@@ -53,7 +53,7 @@ cd backend
 mvn clean compile
 
 # Execute a aplicação
-mvn exec:java -Dexec.mainClass="br.com.neomind.Main"
+mvn jetty:run
 ```
 
 O backend estará rodando em: `http://localhost:8080`

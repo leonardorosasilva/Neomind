@@ -24,6 +24,8 @@ export default function ListagemFornecedores() {
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 5;
     const [searchTerm, setSearchTerm] = useState('');
+    const [sortField, setSortField] = useState<keyof Fornecedor | null>(null);
+    const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc');
 
     const exampleJson = `[
         {
@@ -67,6 +69,59 @@ export default function ListagemFornecedores() {
 
         return false;
     });
+
+    // Aplicar ordenação
+    const sortedFornecedores = [...filteredFornecedores].sort((a, b) => {
+        if (!sortField) return 0;
+
+        const aValue = a[sortField] || '';
+        const bValue = b[sortField] || '';
+
+        // Converter para string para comparação
+        const aStr = String(aValue).toLowerCase();
+        const bStr = String(bValue).toLowerCase();
+
+        if (aStr < bStr) {
+            return sortDirection === 'asc' ? -1 : 1;
+        }
+        if (aStr > bStr) {
+            return sortDirection === 'asc' ? 1 : -1;
+        }
+        return 0;
+    });
+
+    const handleSort = (field: keyof Fornecedor) => {
+        if (sortField === field) {
+            // Se já está ordenando por este campo, inverte a direção
+            setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
+        } else {
+            // Novo campo, começa com ascendente
+            setSortField(field);
+            setSortDirection('asc');
+        }
+    };
+
+    const getSortIcon = (field: keyof Fornecedor) => {
+        if (sortField !== field) {
+            return (
+                <svg className="h-3 w-3 text-gray-400" viewBox="0 0 10 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2.13347 0.0999756H2.98516L5.01902 4.79058H3.86226L3.45549 3.79907H1.63772L1.24366 4.79058H0.0996094L2.13347 0.0999756ZM2.54025 1.46012L1.96822 2.92196H3.11227L2.54025 1.46012Z" fill="currentColor" stroke="currentColor" strokeWidth="0.1" />
+                    <path d="M0.722656 9.60832L3.09974 6.78633H0.811638V5.87109H4.35819V6.78633L2.01925 9.60832H4.43446V10.5617H0.722656V9.60832Z" fill="currentColor" stroke="currentColor" strokeWidth="0.1" />
+                    <path d="M8.45558 7.25664V7.40664H8.60558H9.66065C9.72481 7.40664 9.74667 7.42274 9.75141 7.42691C9.75148 7.42808 9.75146 7.42993 9.75116 7.43262C9.75001 7.44265 9.74458 7.46304 9.72525 7.49314C9.72522 7.4932 9.72518 7.49326 9.72514 7.49332L7.86959 10.3529L7.86924 10.3534C7.83227 10.4109 7.79863 10.418 7.78568 10.418C7.77272 10.418 7.73908 10.4109 7.70211 10.3534L7.70177 10.3529L5.84621 7.49332C5.84617 7.49325 5.84612 7.49318 5.84608 7.49311C5.82677 7.46302 5.82135 7.44264 5.8202 7.43262C5.81989 7.42993 5.81987 7.42808 5.81994 7.42691C5.82469 7.42274 5.84655 7.40664 5.91071 7.40664H6.96578H7.11578V7.25664V0.633865C7.11578 0.42434 7.29014 0.249976 7.49967 0.249976H8.07169C8.28121 0.249976 8.45558 0.42434 8.45558 0.633865V7.25664Z" fill="currentColor" stroke="currentColor" strokeWidth="0.3" />
+                </svg>
+            );
+        }
+
+        return sortDirection === 'asc' ? (
+            <svg className="h-3 w-3 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
+            </svg>
+        ) : (
+            <svg className="h-3 w-3 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+            </svg>
+        );
+    };
 
     const validateFornecedorStructure = (obj: any): obj is Fornecedor => {
         return (
@@ -146,6 +201,7 @@ export default function ListagemFornecedores() {
                         : fornecedor.description
                 }));
                 setFornecedores(processedData);
+                setCloneFornecedores(updatedFornecedores)
             }
 
             setShowImportModal(false);
@@ -226,10 +282,10 @@ export default function ListagemFornecedores() {
         fetchFornecedores();
     }, []);
 
-    const totalPages = Math.ceil(filteredFornecedores.length / itemsPerPage);
+    const totalPages = Math.ceil(sortedFornecedores.length / itemsPerPage);
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
-    const currentFornecedores = filteredFornecedores.slice(startIndex, endIndex);
+    const currentFornecedores = sortedFornecedores.slice(startIndex, endIndex);
 
     const clearSearch = () => {
         setSearchTerm('');
@@ -336,15 +392,16 @@ export default function ListagemFornecedores() {
                     <div className="flex items-center gap-x-3">
                         <h2 className="text-lg font-medium text-gray-800">Fornecedores</h2>
                         <span className="px-3 py-1 text-xs text-blue-600 bg-blue-100 rounded-full">
-                            {filteredFornecedores.length} fornecedores
-                            {searchTerm && filteredFornecedores.length !== fornecedores.length &&
+                            {sortedFornecedores.length} fornecedores
+                            {searchTerm && sortedFornecedores.length !== fornecedores.length &&
                                 <span className="text-gray-500"> de {fornecedores.length}</span>
                             }
                         </span>
                     </div>
                     <p className="mt-1 text-sm text-gray-500">
-                        Página {currentPage} de {totalPages || 1} • Mostrando {currentFornecedores.length} de {filteredFornecedores.length} fornecedores
+                        Página {currentPage} de {totalPages || 1} • Mostrando {currentFornecedores.length} de {sortedFornecedores.length} fornecedores
                         {searchTerm && <span className="text-blue-600"> • Filtrado por: "{searchTerm}"</span>}
+                        {sortField && <span className="text-green-600"> • Ordenado por: {sortField} ({sortDirection === 'asc' ? 'A-Z' : 'Z-A'})</span>}
                     </p>
                 </div>
 
@@ -403,24 +460,23 @@ export default function ListagemFornecedores() {
                     )}
                 </div>
 
-                {/* Mostra quantos resultados foram encontrados */}
-                {searchTerm && (
-                    <div className="mt-4 md:mt-0">
-                        <span className="text-sm text-gray-500">
-                            {filteredFornecedores.length === 0 ? (
-                                <span className="text-red-600">Nenhum fornecedor encontrado</span>
-                            ) : (
-                                <span className="text-green-600">
-                                    {filteredFornecedores.length} fornecedor(es) encontrado(s)
-                                </span>
-                            )}
-                        </span>
-                    </div>
-                )}
+                {/* Mostra quantos resultados foram encontrados */}                    {searchTerm && (
+                        <div className="mt-4 md:mt-0">
+                            <span className="text-sm text-gray-500">
+                                {sortedFornecedores.length === 0 ? (
+                                    <span className="text-red-600">Nenhum fornecedor encontrado</span>
+                                ) : (
+                                    <span className="text-green-600">
+                                        {sortedFornecedores.length} fornecedor(es) encontrado(s)
+                                    </span>
+                                )}
+                            </span>
+                        </div>
+                    )}
             </div>
 
-            {/* Mensagem quando não há resultados */}
-            {searchTerm && filteredFornecedores.length === 0 && (
+                {/* Mensagem quando não há resultados */}
+            {searchTerm && sortedFornecedores.length === 0 && (
                 <div className="mt-6 text-center py-12">
                     <div className="mx-auto w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-12 h-12 text-gray-400">
@@ -450,23 +506,40 @@ export default function ListagemFornecedores() {
                                 <thead className="bg-gray-50">
                                     <tr>
                                         <th scope="col" className="py-3.5 px-4 text-sm font-normal text-left rtl:text-right text-gray-500">
-                                            <button className="flex items-center gap-x-3 focus:outline-none">
+                                            <button 
+                                                onClick={() => handleSort('name')}
+                                                className="flex items-center gap-x-3 focus:outline-none hover:text-gray-700 transition-colors"
+                                            >
                                                 <span>Nome</span>
-                                                <svg className="h-3" viewBox="0 0 10 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M2.13347 0.0999756H2.98516L5.01902 4.79058H3.86226L3.45549 3.79907H1.63772L1.24366 4.79058H0.0996094L2.13347 0.0999756ZM2.54025 1.46012L1.96822 2.92196H3.11227L2.54025 1.46012Z" fill="currentColor" stroke="currentColor" strokeWidth="0.1" />
-                                                    <path d="M0.722656 9.60832L3.09974 6.78633H0.811638V5.87109H4.35819V6.78633L2.01925 9.60832H4.43446V10.5617H0.722656V9.60832Z" fill="currentColor" stroke="currentColor" strokeWidth="0.1" />
-                                                    <path d="M8.45558 7.25664V7.40664H8.60558H9.66065C9.72481 7.40664 9.74667 7.42274 9.75141 7.42691C9.75148 7.42808 9.75146 7.42993 9.75116 7.43262C9.75001 7.44265 9.74458 7.46304 9.72525 7.49314C9.72522 7.4932 9.72518 7.49326 9.72514 7.49332L7.86959 10.3529L7.86924 10.3534C7.83227 10.4109 7.79863 10.418 7.78568 10.418C7.77272 10.418 7.73908 10.4109 7.70211 10.3534L7.70177 10.3529L5.84621 7.49332C5.84617 7.49325 5.84612 7.49318 5.84608 7.49311C5.82677 7.46302 5.82135 7.44264 5.8202 7.43262C5.81989 7.42993 5.81987 7.42808 5.81994 7.42691C5.82469 7.42274 5.84655 7.40664 5.91071 7.40664H6.96578H7.11578V7.25664V0.633865C7.11578 0.42434 7.29014 0.249976 7.49967 0.249976H8.07169C8.28121 0.249976 8.45558 0.42434 8.45558 0.633865V7.25664Z" fill="currentColor" stroke="currentColor" strokeWidth="0.3" />
-                                                </svg>
+                                                {getSortIcon('name')}
                                             </button>
                                         </th>
                                         <th scope="col" className="px-12 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500">
-                                            CNPJ
+                                            <button 
+                                                onClick={() => handleSort('cnpj')}
+                                                className="flex items-center gap-x-3 focus:outline-none hover:text-gray-700 transition-colors"
+                                            >
+                                                <span>CNPJ</span>
+                                                {getSortIcon('cnpj')}
+                                            </button>
                                         </th>
                                         <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500">
-                                            Email
+                                            <button 
+                                                onClick={() => handleSort('email')}
+                                                className="flex items-center gap-x-3 focus:outline-none hover:text-gray-700 transition-colors"
+                                            >
+                                                <span>Email</span>
+                                                {getSortIcon('email')}
+                                            </button>
                                         </th>
                                         <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500">
-                                            Descrição
+                                            <button 
+                                                onClick={() => handleSort('description')}
+                                                className="flex items-center gap-x-3 focus:outline-none hover:text-gray-700 transition-colors"
+                                            >
+                                                <span>Descrição</span>
+                                                {getSortIcon('description')}
+                                            </button>
                                         </th>
                                         <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500">
                                             Ações
